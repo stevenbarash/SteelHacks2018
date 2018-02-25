@@ -86,7 +86,7 @@ app.post('/changeScore', function(req, res) {
 
         res.send(result); //posts the results
         res.send({ status: 200, error: null, response: results }); //sends status
-      } else (initialNumber.score != undefined) {
+      } else {
         console.log(initialNumber[0][0].score + req.body.scoreChange),
           restaurants
             .update(
