@@ -12,7 +12,6 @@ app.use(bodyParser.json({ type: 'application/json' }));
 const sequelize = new Sequelize('foobardb', 'foobar@foobardb', 'ClubHub123', {
   host: 'foobardb.database.windows.net',
   dialect: 'mssql',
-  schema: '763U8',
   dialectOptions: {
     encrypt: true
   }
@@ -53,18 +52,6 @@ Json request:
 }
 */
 
-function changeScore(req, res) {
-  const restaurants = sequelize.define('restaurants', {
-    id: {
-      type: Sequelize.STRING,
-      primaryKey: true
-    },
-    score: {
-      type: Sequelize.INTEGER
-    }
-  });
-}
-
 app.post('/changeScore', function(req, res) {
   res.set('Content-Type', 'application/json'); //sets the content to json
 
@@ -73,7 +60,32 @@ app.post('/changeScore', function(req, res) {
       "SELECT [score] FROM [restaurants] WHERE [id] = '" + req.body.id + "';"
     )
     .then(initialNumber => {
-      if (initialNumber != undefined) {
+      if (initialNumber.score == undefined) {
+        return sequelize
+          .transaction(function(t) {
+            // chain all your queries here. make sure you return them.
+            return restaurants.create(
+              {
+                id: req.body.id, //initializes restaurant id
+                score: req.body.scoreChange //initializes score
+              },
+              { transaction: t }
+            );
+          })
+          .then(function(result) {
+            console.log(result);
+            // Transaction has been committed
+            // result is whatever the result of the promise chain returned to the transaction callback
+          })
+          .catch(function(err) {
+            console.log(err);
+            // Transaction has been rolled back
+            // err is whatever rejected the promise chain returned to the transaction callback
+          });
+
+        res.send(result); //posts the results
+        res.send({ status: 200, error: null, response: results }); //sends status
+      } else {
         restaurants
           .update(
             {
@@ -86,7 +98,7 @@ app.post('/changeScore', function(req, res) {
             }
           )
           .then(() => {});
-      } else console.log('its not there');
+      }
     });
 
   return;
