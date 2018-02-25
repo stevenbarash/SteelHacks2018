@@ -16,6 +16,10 @@ scoreChange is added to the existing score of the restaurant in the DB or initia
 
 Returns all restaurants and scores as JSON
 
+## POST: /clearRestaurants
+
+Clears the restaurants in the db
+
 ## POST: /createRestaurant
 
 <b>USE /changeScore INSTEAD!!</b>

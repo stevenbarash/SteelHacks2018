@@ -154,6 +154,25 @@ app.get('/getRestaurants', function(req, res) {
   });
 });
 
+app.post('/clearRestaurants', function(req, res) {
+  return sequelize
+    .transaction(function(t) {
+      // chain all your queries here. make sure you return them.
+      restaurants.truncate();
+      return 'Successfully cleared';
+    })
+    .then(function(result) {
+      console.log(result);
+      // Transaction has been committed
+      // result is whatever the result of the promise chain returned to the transaction callback
+    })
+    .catch(function(err) {
+      console.log(err);
+      // Transaction has been rolled back
+      // err is whatever rejected the promise chain returned to the transaction callback
+    });
+});
+
 // var connection = mysql.createConnection('./config.json');
 
 // Tell our app to listen on port 3000
