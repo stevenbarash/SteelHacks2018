@@ -18,11 +18,20 @@ results:[]
     .then((response) => response.json())
     .then((responseJson) => {
     	console.log(responseJson);
-    	this.setState({results: responseJson})
+    	this.setState({results: responseJson.sort((a, b) => {
+        if (a.score > b.score)
+            return -1;
+        if (a.score < b.score)
+            return 1;
+        return 0;
+    })})
       return responseJson;
     })
     .catch((error) => {
       console.error(error);
+    })
+    .catch((err) => {
+    console.log(err)
     });
     // getResults(params)
     //   .then(data => {

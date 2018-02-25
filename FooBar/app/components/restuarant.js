@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Platform, TouchableOpacity, Button, TouchableHighlight, FlatList } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import {getRestaurant} from './../util/yelp';
+import { getRestaurant } from './../util/yelp';
 
 export default class RestuarantScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    resuarant:{}
+      resuarant: {}
     };
   }
   componentDidMount() {
     this.loadRestuarants();
   }
   loadRestuarants() {
-  	  getRestaurant(this.props.id).then((response) => {
-  	  	this.setState({resuarant:response})
-  	  })
-    .catch((error) => {
-      console.error(error);
-    });
+    getRestaurant(this.props.id).then((response) => {
+      this.setState({ resuarant: response })
+    })
+      .catch((error) => {
+        console.error(error);
+      });
     // getRestuarants(params)
     //   .then(data => {
     //     console.log("requested Restuarants successfully");
@@ -36,8 +36,8 @@ export default class RestuarantScreen extends Component {
 
   render() {
     return (
-      <View style={{padding:20, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>{this.state.resuarant.name} {this.props.score}</Text>
+      <View key={this.props.key} style={{ padding: 20, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>{this.state.resuarant.name} {this.props.score / 2}</Text>
       </View>
     );
   }

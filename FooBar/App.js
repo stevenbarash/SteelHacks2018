@@ -9,11 +9,14 @@ import ResultsScreen from './app/components/viewResults';
 
 const Tabs = TabNavigator({
   Create: { screen: ChooserScreen },
-  Join: { screen: EnterScreen },
-  Results: {screen:ResultsScreen}
+  Join: { screen: EnterScreen }
 }, { mode: 'modal' });
 
+const RestaurantStack = StackNavigator({
+  Swipe: { screen: SwipeView },
+  Results: { screen: ResultsScreen }
+})
 export default StackNavigator({
   Home: { screen: Tabs },
-  Swipe: { screen: SwipeView },
+  Swipe: { screen: RestaurantStack },
 }, { headerMode: 'none' });
