@@ -60,7 +60,7 @@ app.post('/changeScore', function(req, res) {
       "SELECT [score] FROM [restaurants] WHERE [id] = '" + req.body.id + "';"
     )
     .then(initialNumber => {
-      if (initialNumber.score === undefined) {
+      if (initialNumber === undefined) {
         return sequelize
           .transaction(function(t) {
             // chain all your queries here. make sure you return them.
