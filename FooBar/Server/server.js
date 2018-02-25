@@ -58,10 +58,6 @@ function changeScore(req, res) {
       type: Sequelize.STRING,
       primaryKey: true
     },
-    {
-      schema: '',
-
-    },
     score: {
       type: Sequelize.INTEGER
     }
@@ -76,18 +72,20 @@ app.post('/changeScore', function(req, res) {
       "SELECT [score] FROM [restaurants] WHERE [id] = '" + req.body.id + "';"
     )
     .then(initialNumber => {
-      restaurants
-        .update(
-          {
-            score: initialNumber[0][0].score + req.body.scoreChange //adds new points to initial score
-          },
-          {
-            where: {
-              id: req.body.id
+      if (initialNumber != undefined) {
+        restaurants
+          .update(
+            {
+              score: initialNumber[0][0].score + req.body.scoreChange //adds new points to initial score
+            },
+            {
+              where: {
+                id: req.body.id
+              }
             }
-          }
-        )
-        .then(() => {});
+          )
+          .then(() => {});
+      } else console.log('its not there');
     });
 
   return;
