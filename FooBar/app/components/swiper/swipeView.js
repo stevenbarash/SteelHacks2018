@@ -9,15 +9,19 @@ import { getBusinesses } from './../../util/yelp';
 export default class SwipeView extends Component {
     constructor(props) {
         super(props);
+        this.navprops = this.props.navigation.state;
         this.state = {
+            latitude: this.props.navigation.state.latitude,
+            longitude: this.props.navigation.state.longitude,
+            categories: this.props.navigation.state.categories,
             cards: [],
             length: 0
         };
     }
     componentDidMount() {
-        this.loadBusinesses({}, ['mexican', 'chinese', 'italian']);
+        this.loadBusinesses(this.navprops.categories, { latitude: this.navprops.latitude, longitude: this.navprops.longitude });
     }
-    loadBusinesses(params, categories) {
+    loadBusinesses(categories, params) {
         getBusinesses(params, categories).then((response) => {
             this.setState({ cards: response.businesses, length: this.state.length + response.businesses.length });
         }).catch((err) => {
@@ -42,7 +46,13 @@ export default class SwipeView extends Component {
                 cards={this.state.cards}
                 renderCard={(cardData) => <Card {...cardData} />}
                 loop={true}
-                onLoop={() => { this.loadBusinesses({ offset: this.state.length }, ['mexican', 'chinese', 'italian']) }}
+                onLoop={() => {
+                    this.loadBusinesses(this.navprops.categories, {
+                        latitude: this.navprops.latitude,
+                        longitude: this.navprops.longitude,
+                        offset: this.state.length
+                    });
+                }}
                 handleYup={this.handleYup}
                 handleNope={this.handleNope}
                 handleMaybe={this.handleMaybe}
