@@ -22,6 +22,7 @@ export default class Card extends Component {
                 }</Text>
                 <Text>{this.props.rating + ' / 5'}</Text>
                 <Text>{this.props.price}</Text>
+                <TouchableOpacity onPress={() => { console.log('sup') }} />
             </View>
         );
     }
