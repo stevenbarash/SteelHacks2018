@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var mysql = require('mysql2');
+var tedious = require('tedious');
 const uuidv4 = require('uuid/v4');
 // Create a new instance of express
 const app = express();
@@ -9,14 +9,11 @@ const Sequelize = require('sequelize');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ type: 'application/json' }));
 
-const sequelize = new Sequelize('FooBar', 'FooBar', 'ClubHub123', {
-  host: 'foobar-cluster.cluster-ct6cirtwqihh.us-east-1.rds.amazonaws.com',
-  dialect: 'mysql',
-  pool: {
-    max: 5,
-    min: 1,
-    idle: 20000,
-    acquire: 20000
+const sequelize = new Sequelize('foobardb', 'foobar@foobardb', 'ClubHub123', {
+  host: 'foobardb.database.windows.net',
+  dialect: 'mssql',
+  dialectOptions: {
+    encrypt: true
   }
 });
 
@@ -45,6 +42,11 @@ const restaurants = sequelize.define('restaurants', {
 // // Route that receives a POST request to /user
 // var sql; //stores the sql query
 
+app.post('/changeScore', function(req, res) {
+  res.set('Content-Type', 'application/json'); //sets the content to json
+
+  return;
+});
 app.post('/createRestaurant', function(req, res) {
   res.set('Content-Type', 'application/json'); //sets the content to json
   return sequelize
