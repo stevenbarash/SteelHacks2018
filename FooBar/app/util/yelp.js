@@ -25,3 +25,23 @@ export const getBusinesses = (params = {}, categories = []) => {
         })
     })
 }
+export const getRestaurant = (id) => {
+    var uri = 'https://api.yelp.com/v3/businesses/' + id;
+    console.log(uri);
+    return new Promise((resolve, reject) => {
+        fetch(uri, {
+            method: 'get',
+            headers: {
+                'Authorization': 'Bearer ' + apikey
+            }
+        }).then((response) => {
+            response.json().then((response) => {
+                resolve(response);
+            }).catch((err) => {
+                reject(err);
+            });
+        }).catch((err) => {
+            reject(err);
+        })
+    })
+}
