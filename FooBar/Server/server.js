@@ -148,9 +148,8 @@ app.post('/createRestaurant', function(req, res) {
 });
 
 app.get('/getRestaurants', function(req, res) {
-  console.log(restaurants.findAll());
   res.set('Content-Type', 'application/json'); //sets the content to json
-  restaurants.findOne().then(restaurant => {
+  restaurants.findAll().then(restaurant => {
     res.send(restaurant);
   });
 });
