@@ -9,7 +9,8 @@ import { getBusinesses } from './../../util/yelp';
 export default class SwipeView extends Component {
     constructor(props) {
         super(props);
-        this.navprops = this.props.navigation.state;
+        this.navprops = this.props.navigation.state.params;
+        console.log(this.navprops);
         this.state = {
             latitude: this.props.navigation.state.latitude,
             longitude: this.props.navigation.state.longitude,

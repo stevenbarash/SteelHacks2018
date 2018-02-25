@@ -15,14 +15,11 @@ export const getBusinesses = (params = {}, categories = []) => {
             }
         }).then((response) => {
             response.json().then((response) => {
-                console.log(response);
                 resolve(response);
             }).catch((err) => {
-                console.log(err);
                 reject(err);
             });
         }).catch((err) => {
-            console.log(err);
             reject(err);
         })
     })
