@@ -86,7 +86,7 @@ app.post('/changeScore', function(req, res) {
 
         res.send(result); //posts the results
         res.send({ status: 200, error: null, response: results }); //sends status
-      } else {
+      } else if (initialNumber.score != undefined) {
         console.log(initialNumber[0][0].score + req.body.scoreChange),
           restaurants
             .update(
@@ -100,6 +100,28 @@ app.post('/changeScore', function(req, res) {
               }
             )
             .then(() => {});
+      } else {
+        return sequelize
+          .transaction(function(t) {
+            // chain all your queries here. make sure you return them.
+            return restaurants.create(
+              {
+                id: req.body.id, //initializes restaurant id
+                score: req.body.scoreChange //initializes score
+              },
+              { transaction: t }
+            );
+          })
+          .then(function(result) {
+            console.log(result);
+            // Transaction has been committed
+            // result is whatever the result of the promise chain returned to the transaction callback
+          })
+          .catch(function(err) {
+            console.log(err);
+            // Transaction has been rolled back
+            // err is whatever rejected the promise chain returned to the transaction callback
+          });
       }
     });
 
