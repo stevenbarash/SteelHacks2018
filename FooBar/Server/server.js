@@ -61,6 +61,7 @@ app.post('/changeScore', function(req, res) {
     )
     .then(initialNumber => {
       if (!initialNumber) {
+        console.log('!!!!!IT BREAKS HERE');
         return sequelize
           .transaction(function(t) {
             // chain all your queries here. make sure you return them.
