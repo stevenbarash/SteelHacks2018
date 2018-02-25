@@ -88,6 +88,7 @@ app.post('/changeScore', function(req, res) {
       } else {
         restaurants
           .update(
+            console.log(initialNumber[0][0].score + req.body.scoreChange),
             {
               score: initialNumber[0][0].score + req.body.scoreChange //adds new points to initial score
             },
