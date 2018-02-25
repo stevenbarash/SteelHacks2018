@@ -42,7 +42,7 @@ export default class ChooserScreen extends Component {
         {Object.keys(this.state.categories).map((key) => {
           var categories = this.state.categories;
           return (
-            <TouchableHighlight onPress={() => {
+            <TouchableHighlight key={key} onPress={() => {
               categories[key] = !this.state.categories[key];
               this.setState({ categories: categories })
             }}>
@@ -54,7 +54,13 @@ export default class ChooserScreen extends Component {
         })}
 
         <Button title='Start FooBar' onPress={() => {
-          var categories = Object.keys(this.state.categories);
+          var allcategories = Object.keys(this.state.categories);
+          console.log(allcategories);
+          var categories = []
+          for (var i = 0; i < allcategories.length; i++) {
+            if (this.state.categories[allcategories[i]])
+              categories.push(allcategories[i]);
+          }
           this.props.navigation.navigate('Swipe', { latitude: this.state.latitude, longitude: this.state.longitude, categories: categories })
         }} />
         <Text>Your Location:</Text>

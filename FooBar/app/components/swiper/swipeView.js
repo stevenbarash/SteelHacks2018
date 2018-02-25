@@ -101,7 +101,6 @@ export default class SwipeView extends Component {
     constructor(props) {
         super(props);
         this.navprops = this.props.navigation.state.params;
-        console.log(this.navprops);
         this.state = {
             latitude: this.props.navigation.state.latitude,
             longitude: this.props.navigation.state.longitude,
@@ -111,6 +110,7 @@ export default class SwipeView extends Component {
         };
     }
     componentDidMount() {
+        console.log(this.navprops);
         this.loadBusinesses(this.navprops.categories, { latitude: this.navprops.latitude, longitude: this.navprops.longitude });
     }
     loadBusinesses(categories, params) {
