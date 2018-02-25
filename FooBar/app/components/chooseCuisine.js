@@ -12,11 +12,7 @@ export default class ChooserScreen extends Component {
       latitude: 37,
       longitude: -122,
       error: null,
-      chinese: false,
-      italian: false,
-      mexican: false,
-      indian: false,
-      american: false
+      categories: { chinese: false, italian: false, mexican: false, indian: false, american: false }
     };
   }
 
@@ -43,48 +39,29 @@ export default class ChooserScreen extends Component {
         <Text style={styles.instructions}>
           Food Choices
         </Text>
-
-        <TouchableHighlight onPress={() => { this.setState({ chinese: !this.state.chinese }) }}>
-          <View style={{ padding: 20, backgroundColor: this.state.chinese ? 'green' : 'red' }}>
-            <Text>Chinese</Text>
-          </View>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={() => { this.setState({ italian: !this.state.italian }) }}>
-          <View style={{ padding: 20, backgroundColor: this.state.italian ? 'green' : 'red' }}>
-            <Text>Italian</Text>
-          </View>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={() => { this.setState({ mexican: !this.state.mexican }) }}>
-          <View style={{ padding: 20, backgroundColor: this.state.mexican ? 'green' : 'red' }}>
-            <Text>Mexican</Text>
-          </View>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={() => { this.setState({ indian: !this.state.indian }) }}>
-          <View style={{ padding: 20, backgroundColor: this.state.indian ? 'green' : 'red' }}>
-            <Text>Indian</Text>
-          </View>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={() => { this.setState({ american: !this.state.american }) }}>
-          <View style={{ padding: 20, backgroundColor: this.state.american ? 'green' : 'red' }}>
-            <Text>American</Text>
-          </View>
-        </TouchableHighlight>
+        {Object.keys(this.state.categories).map((key) => {
+          var categories = this.state.categories;
+          return (
+            <TouchableHighlight onPress={() => {
+              categories[key] = !this.state.categories[key];
+              this.setState({ categories: categories })
+            }}>
+              <View style={{ padding: 20, backgroundColor: this.state.categories[key] ? 'green' : 'red' }}>
+                <Text>{key}</Text>
+              </View>
+            </TouchableHighlight>
+          )
+        })}
 
         <Button title='Start FooBar' onPress={() => {
-          var categories = [];
-          //['chinese', 'mexican']
-          categories.push('chinese')
-          this.props.navigation.navigate('Swipe', { latitude: this.state.latitude, longitude: this.state.longitude, categories})
+          var categories = Object.keys(this.state.categories);
+          this.props.navigation.navigate('Swipe', { latitude: this.state.latitude, longitude: this.state.longitude, categories: categories })
         }} />
         <Text>Your Location:</Text>
         <Text>Latitude: {this.state.latitude}</Text>
         <Text>Longitude: {this.state.longitude}</Text>
         {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
-      </View>
+      </View >
     );
   }
 }
