@@ -86,19 +86,19 @@ app.post('/changeScore', function(req, res) {
         res.send(result); //posts the results
         res.send({ status: 200, error: null, response: results }); //sends status
       } else {
-        restaurants
-          .update(
-            console.log(initialNumber[0][0].score + req.body.scoreChange),
-            {
-              score: initialNumber[0][0].score + req.body.scoreChange //adds new points to initial score
-            },
-            {
-              where: {
-                id: req.body.id
+        console.log(initialNumber[0][0].score + req.body.scoreChange),
+          restaurants
+            .update(
+              {
+                score: initialNumber[0][0].score + req.body.scoreChange //adds new points to initial score
+              },
+              {
+                where: {
+                  id: req.body.id
+                }
               }
-            }
-          )
-          .then(() => {});
+            )
+            .then(() => {});
       }
     });
 
