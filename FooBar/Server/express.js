@@ -25,7 +25,8 @@ sequelize
 
 const restaurants = sequelize.define('restaurants', {
   id: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    primaryKey: true
   },
   score: {
     type: Sequelize.INTEGER
