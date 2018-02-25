@@ -10,12 +10,16 @@ export default class SwipeView extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cards: []
+            cards: [],
+            length: 0
         };
     }
     componentDidMount() {
-        getBusinesses({}, ['bbq', 'asianfusion', 'japanese', 'italian', 'mexican']).then((response) => {
-            this.setState({ cards: response.businesses });
+        this.loadBusinesses({}, ['mexican']);
+    }
+    loadBusinesses(params, categories) {
+        getBusinesses(params, categories).then((response) => {
+            this.setState({ cards: response.businesses, length: this.state.length + response.businesses.length });
         }).catch((err) => {
             console.log(err);
         });
@@ -34,7 +38,8 @@ export default class SwipeView extends Component {
             <SwipeCards
                 cards={this.state.cards}
                 renderCard={(cardData) => <Card {...cardData} />}
-                renderNoMoreCards={() => <NoMoreCards />}
+                loop={true}
+                onLoop={() => { this.loadBusinesses({ offset: this.state.length }, ['mexican']) }}
                 handleYup={this.handleYup}
                 handleNope={this.handleNope}
                 handleMaybe={this.handleMaybe}
