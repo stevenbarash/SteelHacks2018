@@ -14,7 +14,7 @@ const sequelize = new Sequelize('FooBar', 'FooBar', 'ClubHub123', {
   dialect: 'mysql',
   pool: {
     max: 5,
-    min: 0,
+    min: 1,
     idle: 20000,
     acquire: 20000
   }
@@ -90,7 +90,7 @@ app.post('/createRestaurant', function(req, res) {
 });
 
 app.get('/getRestaurants', function(req, res) {
-  res.send('hello world');
+  res.send(restaurants.findAll().toJSON);
 });
 
 // var connection = mysql.createConnection('./config.json');
