@@ -37,7 +37,7 @@ export default class RestuarantScreen extends Component {
   render() {
     return (
       <View style={{padding:20, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>{this.state.resuarant.name}</Text>
+        <Text>{this.state.resuarant.name} {this.props.score}</Text>
       </View>
     );
   }

@@ -47,7 +47,7 @@ results:[]
         <FlatList
         style={{ flex: 1 }}
         data={this.state.results}
-        renderItem={({ item }) => <RestuarantScreen key={item.id} id={item.id}/>}
+        renderItem={({ item }) => <RestuarantScreen key={item.id} score={item.score} id={item.id}/>}
       />
       </View>
     );
