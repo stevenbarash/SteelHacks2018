@@ -12,6 +12,7 @@ app.use(bodyParser.json({ type: 'application/json' }));
 const sequelize = new Sequelize('foobardb', 'foobar@foobardb', 'ClubHub123', {
   host: 'foobardb.database.windows.net',
   dialect: 'mssql',
+  schema: '763U8',
   dialectOptions: {
     encrypt: true
   }
