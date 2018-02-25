@@ -13,7 +13,6 @@ import Card from './card';
 import { getBusinesses } from './../../util/yelp';
 
 export default class SwipeView extends Component {
-<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
@@ -98,8 +97,7 @@ export default class SwipeView extends Component {
       </View>
     );
   }
-}
-=======
+
     constructor(props) {
         super(props);
         this.state = {
@@ -148,4 +146,3 @@ export default class SwipeView extends Component {
             );
     }
 }
->>>>>>> 1123188dda0f689e12ada96feb6d55a8b48c97ed

@@ -5505,8 +5505,8 @@ sentence-case@^1.1.1, sentence-case@^1.1.2:
     lower-case "^1.1.1"
 
 sequelize@^4.33.4:
-  version "4.33.4"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.33.4.tgz#5581183e8bb902499ea1be96aa8585743a2b9b1c"
+  version "4.34.0"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-4.34.0.tgz#c77168559836db6639d1ec1dcd315ad925ececc3"
   dependencies:
     bluebird "^3.5.0"
     cls-bluebird "^2.1.0"
