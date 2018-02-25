@@ -83,8 +83,8 @@ app.post('/createRestaurant', function(req, res) {
       // chain all your queries here. make sure you return them.
       return restaurants.create(
         {
-          id: req.body.id,
-          score: 0
+          id: req.body.id, //initializes restaurant id
+          score: req.body.score //initializes score
         },
         { transaction: t }
       );
