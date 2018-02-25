@@ -15,7 +15,7 @@ export default class SwipeView extends Component {
         };
     }
     componentDidMount() {
-        this.loadBusinesses({}, ['mexican']);
+        this.loadBusinesses({}, ['mexican', 'chinese', 'italian']);
     }
     loadBusinesses(params, categories) {
         getBusinesses(params, categories).then((response) => {
@@ -25,12 +25,15 @@ export default class SwipeView extends Component {
         });
     }
     handleYup(card) {
+        console.log("yup");
         // send yes to steven
     }
     handleNope(card) {
+        console.log("nope");
         // send no to steven
     }
     handleMaybe(card) {
+        console.log("maybe");
         // send maybe to steven
     }
     render() {
@@ -39,7 +42,7 @@ export default class SwipeView extends Component {
                 cards={this.state.cards}
                 renderCard={(cardData) => <Card {...cardData} />}
                 loop={true}
-                onLoop={() => { this.loadBusinesses({ offset: this.state.length }, ['mexican']) }}
+                onLoop={() => { this.loadBusinesses({ offset: this.state.length }, ['mexican', 'chinese', 'italian']) }}
                 handleYup={this.handleYup}
                 handleNope={this.handleNope}
                 handleMaybe={this.handleMaybe}

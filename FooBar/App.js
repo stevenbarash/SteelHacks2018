@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
+
+import { StackNavigator, TabNavigator } from 'react-navigation';
 
 import SwipeView from './app/components/swiper/swipeView';
+import ChooserScreen from './app/components/chooseCuisine';
+import EnterScreen from './app/components/enterCode';
 
-export default class App extends React.Component {
-  render() {
-    return (
-        <SwipeView style={{ flex: 1, justifyContent:'center', alignItems:'center' }} />
-    );
-  }
-}
+const Tabs = TabNavigator({
+  Create: { screen: ChooserScreen },
+  Join: { screen: EnterScreen }
+}, { mode: 'modal' });
+
+export default StackNavigator({
+  Home: { screen: Tabs },
+  Swipe: { screen: SwipeView },
+}, { headerMode: 'none' });
