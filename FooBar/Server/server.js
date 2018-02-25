@@ -52,6 +52,22 @@ Json request:
 }
 */
 
+function changeScore(req, res) {
+  const restaurants = sequelize.define('restaurants', {
+    id: {
+      type: Sequelize.STRING,
+      primaryKey: true
+    },
+    {
+      schema: '',
+
+    },
+    score: {
+      type: Sequelize.INTEGER
+    }
+  });
+}
+
 app.post('/changeScore', function(req, res) {
   res.set('Content-Type', 'application/json'); //sets the content to json
 
