@@ -7,6 +7,7 @@ export const getBusinesses = (params = {}, categories = []) => {
         .map(k => esc(k) + '=' + esc(params[k]))
         .join('&');
     var uri = 'https://api.yelp.com/v3/businesses/search?' + query + '&categories=' + categories.join(',');
+    console.log(uri);
     return new Promise((resolve, reject) => {
         fetch(uri, {
             method: 'get',
