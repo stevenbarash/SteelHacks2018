@@ -1,23 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
+import { StackNavigator, TabNavigator } from 'react-navigation';
+import ChooserScreen from './app/components/chooseCuisine'
+import CreatorScreen from './app/components/createCode';
+import EnterScreen from './app/components/enterCode';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+export default StackNavigator({
+  Creator: { screen: CreatorScreen },
+  Chooser: { screen: ChooserScreen },
+  Enter: {screen: EnterScreen},
 });
