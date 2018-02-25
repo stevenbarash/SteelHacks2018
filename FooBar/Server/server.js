@@ -67,7 +67,7 @@ app.post('/changeScore', function(req, res) {
             return restaurants.create(
               {
                 id: req.body.id, //initializes restaurant id
-                scoreChange: req.body.scoreChange //initializes score
+                score: req.body.scoreChange //initializes score
               },
               { transaction: t }
             );
