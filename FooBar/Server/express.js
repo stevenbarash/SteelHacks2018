@@ -11,7 +11,13 @@ app.use(bodyParser.json({ type: 'application/json' }));
 
 const sequelize = new Sequelize('FooBar', 'FooBar', 'ClubHub123', {
   host: 'foobar-cluster.cluster-ct6cirtwqihh.us-east-1.rds.amazonaws.com',
-  dialect: 'mysql'
+  dialect: 'mysql',
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  }
 });
 
 sequelize
