@@ -42,8 +42,37 @@ const restaurants = sequelize.define('restaurants', {
 // // Route that receives a POST request to /user
 // var sql; //stores the sql query
 
+/*
+Syntax to change score:
+Json request:
+
+{
+	"id":"<ID OF RESTAURANT>",
+	"scoreChange": <NUMBER TO CHANGE>
+}
+*/
+
 app.post('/changeScore', function(req, res) {
   res.set('Content-Type', 'application/json'); //sets the content to json
+
+  sequelize
+    .query(
+      "SELECT [score] FROM [restaurants] WHERE [id] = '" + req.body.id + "';"
+    )
+    .then(initialNumber => {
+      restaurants
+        .update(
+          {
+            score: initialNumber[0][0].score + req.body.scoreChange //adds new points to initial score
+          },
+          {
+            where: {
+              id: req.body.id
+            }
+          }
+        )
+        .then(() => {});
+    });
 
   return;
 });
@@ -92,7 +121,11 @@ app.post('/createRestaurant', function(req, res) {
 });
 
 app.get('/getRestaurants', function(req, res) {
-  res.send(restaurants.findAll().toJSON);
+  console.log(restaurants.findOne());
+  res.set('Content-Type', 'application/json'); //sets the content to json
+  restaurants.findOne().then(restaurant => {
+    res.send(restaurant);
+  });
 });
 
 // var connection = mysql.createConnection('./config.json');
